@@ -20,7 +20,7 @@ function openAudioModal(triggerElement) {
         .querySelector('.page-wrapper')
         .addEventListener('click', clickEventListener);
     // Add keydown listener for Escape key when modal is open
-    document.addEventListener('keydown', handleModalKeydown);
+    document.addEventListener('keydown', handleAudioModalKeydown);
 }
 
 function closeAudioModal() {
@@ -35,7 +35,7 @@ function closeAudioModal() {
     }
 
     // Remove keydown listener when modal is closed
-    document.removeEventListener('keydown', handleModalKeydown);
+    document.removeEventListener('keydown', handleAudioModalKeydown);
 
     // Remove the click event listener using the stored reference
     if (clickEventListener) {
@@ -57,7 +57,7 @@ function playback() {
 
 // Accessibility
 // Function to handle keydown on glossary links
-function handleLinkKeydown(e) {
+function handleAudioLinkKeydown(e) {
     if (e.key === 'Enter') {
         // Simulate a click event
         this.click();
@@ -65,7 +65,7 @@ function handleLinkKeydown(e) {
 }
 
 // Function to handle keydown for closing modal
-function handleModalKeydown(e) {
+function handleAudioModalKeydown(e) {
     if (e.key === 'Escape') {
         closeAudioModal();
     }
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 closeAudioModal();
                 openAudioModal(link);
             });
-            link.addEventListener('keydown', handleLinkKeydown);
+            link.addEventListener('keydown', handleAudioLinkKeydown);
         });
 
         audioPlayLink.addEventListener('click', playback);
