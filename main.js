@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         audioPlayLink.addEventListener('click', playback);
+        audioPlayLink.addEventListener('touchstart', playback);
         audioModalClose.addEventListener('click', closeAudioModal);
     }
 });
