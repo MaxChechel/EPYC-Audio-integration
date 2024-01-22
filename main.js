@@ -1,5 +1,3 @@
-//import { Howl, Howler } from 'howler';
-
 const audioModal = document.querySelector('.audio-modal_component');
 const audioPlayLink = audioModal.querySelector('.audio-modal_play-link');
 const audioModalClose = audioModal.querySelector(
