@@ -1,4 +1,4 @@
-import { Howl, Howler } from 'howler';
+//import { Howl, Howler } from 'howler';
 
 const audioModal = document.querySelector('.audio-modal_component');
 const audioPlayLink = audioModal.querySelector('.audio-modal_play-link');
@@ -80,23 +80,26 @@ function closeModalOnClick(e, triggerElement) {
         closeModal();
     }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    if (audioModal) {
+        audioLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                const audio = link.getAttribute('data-audio');
 
-audioLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-        const audio = link.getAttribute('data-audio');
+                if (currentAudio !== audio) {
+                    if (sound) {
+                        sound.unload(); // Unload the previous sound
+                    }
+                    sound = new Howl({ src: [audio] });
+                    currentAudio = audio;
+                }
+                closeModal();
+                openModal(link);
+            });
+            link.addEventListener('keydown', handleLinkKeydown);
+        });
 
-        if (currentAudio !== audio) {
-            if (sound) {
-                sound.unload(); // Unload the previous sound
-            }
-            sound = new Howl({ src: [audio] });
-            currentAudio = audio;
-        }
-        closeModal();
-        openModal(link);
-    });
-    link.addEventListener('keydown', handleLinkKeydown);
+        audioPlayLink.addEventListener('click', playback);
+        audioModalClose.addEventListener('click', closeModal);
+    }
 });
-
-audioPlayLink.addEventListener('click', playback);
-audioModalClose.addEventListener('click', closeModal);
