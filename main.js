@@ -6,6 +6,7 @@ const audioModalClose = audioModal.querySelector(
 const audioLinks = document.querySelectorAll('.text-rich-text a[data-audio]');
 
 let lastFocusedAudioElement;
+let clickAudioEventListener; // Declare a variable to store the click event listener
 let sound = null;
 let currentAudio = '';
 
@@ -15,10 +16,10 @@ function openAudioModal(triggerElement) {
     audioPlayLink.focus();
 
     // Close outside modal
-    clickEventListener = (e) => closeModalOnClick(e, triggerElement); // Store the reference
+    clickAudioEventListener = (e) => closeModalOnClick(e, triggerElement); // Store the reference
     document
         .querySelector('.page-wrapper')
-        .addEventListener('click', clickEventListener);
+        .addEventListener('click', clickAudioEventListener);
     // Add keydown listener for Escape key when modal is open
     document.addEventListener('keydown', handleAudioModalKeydown);
 }
@@ -38,10 +39,10 @@ function closeAudioModal() {
     document.removeEventListener('keydown', handleAudioModalKeydown);
 
     // Remove the click event listener using the stored reference
-    if (clickEventListener) {
+    if (clickAudioEventListener) {
         document
             .querySelector('.page-wrapper')
-            .removeEventListener('click', clickEventListener);
+            .removeEventListener('click', clickAudioEventListener);
     }
 }
 
@@ -70,8 +71,6 @@ function handleAudioModalKeydown(e) {
         closeAudioModal();
     }
 }
-
-let clickAudioEventListener; // Declare a variable to store the click event listener
 
 function closeModalOnClick(e, triggerElement) {
     if (!audioModal.contains(e.target) && e.target !== triggerElement) {
