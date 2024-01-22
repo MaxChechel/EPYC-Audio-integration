@@ -71,7 +71,7 @@ function handleAudioModalKeydown(e) {
     }
 }
 
-let clickEventListener; // Declare a variable to store the click event listener
+let clickAudioEventListener; // Declare a variable to store the click event listener
 
 function closeModalOnClick(e, triggerElement) {
     if (!audioModal.contains(e.target) && e.target !== triggerElement) {
