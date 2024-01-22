@@ -7,12 +7,12 @@ const audioModalClose = audioModal.querySelector(
 );
 const audioLinks = document.querySelectorAll('.text-rich-text a[data-audio]');
 
-let lastFocusedElement;
+let lastFocusedAudioElement;
 let sound = null;
 let currentAudio = '';
 
 function openModal(triggerElement) {
-    lastFocusedElement = triggerElement;
+    lastFocusedAudioElement = triggerElement;
     audioModal.classList.add('is-active');
     audioPlayLink.focus();
 
@@ -32,8 +32,8 @@ function closeModal() {
         audioPlayLink.textContent = 'Play audio';
     }
 
-    if (lastFocusedElement) {
-        lastFocusedElement.focus(); // Set focus back to the element that opened the modal
+    if (lastFocusedAudioElement) {
+        lastFocusedAudioElement.focus(); // Set focus back to the element that opened the modal
     }
 
     // Remove keydown listener when modal is closed
