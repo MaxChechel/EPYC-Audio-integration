@@ -11,7 +11,7 @@ let lastFocusedAudioElement;
 let sound = null;
 let currentAudio = '';
 
-function openModal(triggerElement) {
+function openAudioModal(triggerElement) {
     lastFocusedAudioElement = triggerElement;
     audioModal.classList.add('is-active');
     audioPlayLink.focus();
@@ -25,7 +25,7 @@ function openModal(triggerElement) {
     document.addEventListener('keydown', handleModalKeydown);
 }
 
-function closeModal() {
+function closeAudioModal() {
     audioModal.classList.remove('is-active');
     if (sound) {
         sound.stop();
@@ -69,7 +69,7 @@ function handleLinkKeydown(e) {
 // Function to handle keydown for closing modal
 function handleModalKeydown(e) {
     if (e.key === 'Escape') {
-        closeModal();
+        closeAudioModal();
     }
 }
 
@@ -77,7 +77,7 @@ let clickEventListener; // Declare a variable to store the click event listener
 
 function closeModalOnClick(e, triggerElement) {
     if (!audioModal.contains(e.target) && e.target !== triggerElement) {
-        closeModal();
+        closeAudioModal();
     }
 }
 document.addEventListener('DOMContentLoaded', function () {
@@ -93,13 +93,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     sound = new Howl({ src: [audio] });
                     currentAudio = audio;
                 }
-                closeModal();
-                openModal(link);
+                closeAudioModal();
+                openAudioModal(link);
             });
             link.addEventListener('keydown', handleLinkKeydown);
         });
 
         audioPlayLink.addEventListener('click', playback);
-        audioModalClose.addEventListener('click', closeModal);
+        audioModalClose.addEventListener('click', closeAudioModal);
     }
 });
