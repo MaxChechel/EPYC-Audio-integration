@@ -81,7 +81,8 @@ function closeModalOnClick(e, triggerElement) {
 document.addEventListener('DOMContentLoaded', function () {
     if (audioModal) {
         audioLinks.forEach((link) => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
                 const audio = link.getAttribute('data-audio');
 
                 if (currentAudio !== audio) {
