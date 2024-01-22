@@ -8,11 +8,21 @@ const audioLinks = document.querySelectorAll('.text-rich-text a[data-audio]');
 let audioElement = null;
 let lastFocusedAudioElement;
 
+let clickOutsideEventListener; // Declare a variable to store the click outside event listener
+
 function openAudioModal(triggerElement) {
     lastFocusedAudioElement = triggerElement;
     audioModal.classList.add('is-active');
     audioPlayLink.focus();
     document.addEventListener('keydown', handleAudioModalKeydown);
+
+    // Close modal when clicking outside
+    clickOutsideEventListener = (e) => {
+        if (!audioModal.contains(e.target) && e.target !== triggerElement) {
+            closeAudioModal();
+        }
+    };
+    document.addEventListener('click', clickOutsideEventListener);
 }
 
 function closeAudioModal() {
@@ -25,6 +35,7 @@ function closeAudioModal() {
         lastFocusedAudioElement.focus();
     }
     document.removeEventListener('keydown', handleAudioModalKeydown);
+    document.removeEventListener('click', clickOutsideEventListener); // Remove the click outside listener
 }
 
 function playback() {
